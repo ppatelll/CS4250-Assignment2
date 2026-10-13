@@ -33,17 +33,17 @@ while front:
     except requests.RequestException as error:
         print(f"Could not retrieve {url}: {error}")
         continue
-    soup = BeautifulSoup(ans.text, "html.parser")
+    temp = BeautifulSoup(ans.text, "html.parser")
 
     # Printing the text contained in the <h1> element
     # --> add your Python code here
-    h = soup.find("h1")
+    h = temp.find("h1")
     print(h.get_text(strip=True) if h else "(no <h1> element)")
 
     # Extracting and processing hyperlinks
     # --> add your Python code here
     webs =[]
-    for y in soup.find_all("a", href=True):
+    for y in temp.find_all("a", href=True):
         link = urljoin(url, y["href"].strip())
         link, _ = urldefrag(link)
         if link == seed or link.startswith(seed + "/"):
